@@ -8,10 +8,16 @@ return {
 
 	{
 		"williamboman/mason-lspconfig.nvim",
+		lazy = false,
+	},
+
+	{
+		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "neovim/nvim-lspconfig" },
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "html", "cssls", "bashls", "jsonls" },
+				ensure_installed = { "lua_ls", "ts_ls", "html", "cssls", "bashls", "jsonls", "pyright" },
+				auto_install = true,
 			})
 		end,
 	},
@@ -57,6 +63,12 @@ return {
 				capabilities = capabilities,
 			}
 			vim.lsp.enable("jsonls")
+
+			-- Python
+			vim.lsp.config["pyright"] = {
+				capabilities = capabilities,
+			}
+			vim.lsp.enable("pyright")
 		end,
 	},
 	{
