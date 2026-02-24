@@ -15,6 +15,7 @@ return {
 				null_ls.builtins.formatting.isort, -- Python imports sorter
 				null_ls.builtins.formatting.rubocop, -- Ruby formatter
 				null_ls.builtins.formatting.shfmt, -- Bash formatter
+				null_ls.builtins.formatting.clang_format, -- C/C++ formatter
 
 				-- Linters
 				require("none-ls.diagnostics.eslint_d"), -- JS/TS linter

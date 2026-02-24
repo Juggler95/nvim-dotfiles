@@ -16,7 +16,7 @@ return {
 		dependencies = { "neovim/nvim-lspconfig" },
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "html", "cssls", "bashls", "jsonls", "pyright" },
+			ensure_installed = { "lua_ls", "ts_ls", "html", "cssls", "bashls", "jsonls", "pyright", "clangd" },
 				auto_install = true,
 			})
 		end,
@@ -69,6 +69,12 @@ return {
 				capabilities = capabilities,
 			}
 			vim.lsp.enable("pyright")
+
+			-- C/C++
+			vim.lsp.config["clangd"] = {
+				capabilities = capabilities,
+			}
+			vim.lsp.enable("clangd")
 		end,
 	},
 	{

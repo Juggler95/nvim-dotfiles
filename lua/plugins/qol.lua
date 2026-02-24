@@ -1,15 +1,16 @@
 return {
-
-	-- "mini Surround"
 	{
-		"echasnovski/mini.surround",
-		opts = {
-			custom_surroundings = nil,
-			highlight_durations = 500,
-			mappings = {
-				add = "sa", -- Add surrounding in Normal and Visual Modes
-				delete = "sd", -- Delete 'surrounding'
-			},
+		"vim-test/vim-test",
+		dependencies = {
+			"preservim/vimux",
+
+			vim.keymap.set("n", "<leader>t", ":TestNearest<CR>"),
+			vim.keymap.set("n", "<leader>T", ":TestFile<CR>"),
+			-- vim.keymap.set('n', '<leader>a', ':TestSuite<CR>'),
+			vim.keymap.set("n", "<leader>L", ":TestLast<CR>"),
+			vim.keymap.set("n", "<leader>g", ":TestVisit<CR>"),
+
+			vim.cmd("let test#strategy = 'vimux'"),
 		},
 	},
 
@@ -107,5 +108,13 @@ return {
 	-- only showing relative line numbers in normal mode
 	{
 		"sitiom/nvim-numbertoggle",
+	},
+
+	{
+		"tummetott/unimpaired.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add options here if you wish to override the default settings
+		},
 	},
 }

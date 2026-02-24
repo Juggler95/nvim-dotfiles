@@ -5,7 +5,7 @@ return {
 		lazy = false, -- load on startup
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "css", "html", "javascript", "lua", "bash"}, -- add the languages you want
+				ensure_installed = { "css", "html", "javascript", "lua", "bash", "c", "python" }, -- add the languages you want
 				auto_install = true,
 				highlight = { enable = true },
 				indent = { enable = true },
