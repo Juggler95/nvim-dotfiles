@@ -14,8 +14,13 @@ return {
 				{ section = "recent_files", icon = " ", title = "Recent Files", pane = 1, indent = 3, padding = 1 },
 				{
 					section = "terminal",
-					-- cmd = "ascii-image-converter ~/Downloads/jinx.webp -C -c",
-					cmd = "ascii-image-converter ~/.config/colorschemes/jinx/jinx.webp -C -c",
+					cmd = (function()
+						local image_path = vim.fn.stdpath("config") .. "/assets/jinx.webp"
+						if vim.fn.executable("ascii-image-converter") == 1 and vim.fn.filereadable(image_path) == 1 then
+							return "ascii-image-converter " .. vim.fn.shellescape(image_path) .. " -C -c"
+						end
+						return "printf 'Install ascii-image-converter to enable dashboard image\n'"
+					end)(),
 					pane = 2,
 					indent = 1,
 					-- height = 30,

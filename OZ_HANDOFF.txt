@@ -1,0 +1,67 @@
+OZ HANDOFF STATE (Neovim config)
+Last updated: 2026-04-04
+
+Purpose
+- This file exists so a future Oz session can resume work quickly.
+- User can say: "Read /home/juggler95/.config/nvim/OZ_HANDOFF.txt and continue."
+
+Original request
+1) Rewrite README with complete new-system setup.
+2) Explain how to add new language support.
+3) Document required installs/dependencies.
+4) Make config portable across Linux and macOS.
+5) Move/fix dashboard image path to a config-local asset if needed.
+6) Keep a persistent handoff file updated for future sessions.
+
+Status
+- All requested items above are implemented.
+
+Changes made
+1) README rewritten with full setup + portability docs:
+   - /home/juggler95/.config/nvim/README.md
+   - Includes: dependency list, install commands (macOS/Linux examples), first-run checks, none-ls tool installs, language onboarding workflow, troubleshooting.
+
+2) Cross-platform path fixes:
+   - /home/juggler95/.config/nvim/lua/plugins/completions.lua
+     - LuaSnip local snippets path now uses stdpath("config")/snippets.
+   - /home/juggler95/.config/nvim/lua/plugins/snacks.lua
+     - Dashboard image path now uses stdpath("config")/assets/jinx.webp.
+     - Added safe fallback message when ascii-image-converter is unavailable.
+
+3) Cross-platform executable detection:
+   - /home/juggler95/.config/nvim/lua/plugins/live-server.lua
+     - Replaced shell-specific `which` + `os.execute` logic with `vim.fn.executable` + `vim.fn.system`.
+     - Added warnings when npm/pnpm is missing or install fails.
+
+4) Config reliability cleanup while implementing portability:
+   - /home/juggler95/.config/nvim/lua/plugins/venv-selector.lua
+     - Fixed keymap command to `<cmd>VenvSelect<cr>`.
+   - /home/juggler95/.config/nvim/lua/plugins/debugging.lua
+     - Rewritten into clean, portable DAP config (still uses stdpath for js-debug adapter path).
+   - /home/juggler95/.config/nvim/lua/plugins/qol.lua
+     - Removed duplicate `vim-test` declaration block.
+   - /home/juggler95/.config/nvim/lua/plugins/vim-test.lua
+     - Converted to proper Lazy plugin spec with a `config` function.
+
+Validation performed
+- Lua syntax check passed for all config/plugin/snippet files using `luac -p`.
+- Searched for hardcoded `/home/...` and `~/.config/...` paths in `lua/`; none remain except intended plugin name text.
+
+Potential optional follow-ups (not required for this request)
+1) Start Neovim and run:
+   - :checkhealth
+   - :Lazy sync
+   - :Mason
+2) Confirm optional tools are installed on target machine:
+   - ascii-image-converter (dashboard image)
+   - lazygit
+   - tmux + tmux-sessionizer (if using those keymaps)
+
+Resume instructions for next Oz session
+- Read this file first.
+- Then inspect these files if further edits are requested:
+  - /home/juggler95/.config/nvim/README.md
+  - /home/juggler95/.config/nvim/lua/plugins/snacks.lua
+  - /home/juggler95/.config/nvim/lua/plugins/live-server.lua
+  - /home/juggler95/.config/nvim/lua/plugins/completions.lua
+  - /home/juggler95/.config/nvim/lua/plugins/venv-selector.lua
